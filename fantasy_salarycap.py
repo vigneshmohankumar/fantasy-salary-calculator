@@ -1,37 +1,47 @@
+# coding: utf-8
+
 import simplejson as json
+import csv
 
-salaries_file = open('/Users/vignesh/Desktop/DESKTOP/python/salaries')
-salaries = json.load(salaries_file)
-salaries_file.close()
+def __init__(self, team, total_salary):
+	self.team = team
+	self.total_salary = total_salary
 
-print json.dumps(salaries)
-
-team_list = [team1, team2, team3]
-
-team1 = ['rajon rondo', 'deron williams', 'chris paul', 'kobe bryant', 'carmelo anthony']
-team2 = ['dwight howard', 'kevin durant', 'chris johnson', 'wesley matthews']
-team3 = ['nene', 'gerald wallace', 'paul pierce', 'stephen curry']
-
-team1_salaries = []
-team2_salaries = []
-team3_salaries = []
-
-for index in range(len(team_list)):
-	i = (item).next()
-	i = team
-	calc_salary(team)
-	calc_netsalary(team)
+def player_search(player):
+	with open('./salaries.csv', mode='rU') as f:
+	    reader = csv.reader(f)
+	    for num, row in enumerate(reader):
+	        if player in row[0]:
+	            return row[1]
+            else:
+            	return None
 
 def calc_salary(team):
-	for index in range(len(%r)): 
-		i = (item["salary"] for item in salaries if item["player"] == %r[index]).next() % team
-		%r_salaries.append(i) % team
+	total_salary = 0
+	for index, player in enumerate(team):
+		#print player
+		if player_search(player) != None:
+			salary = player_search(player)
+			#print salary
+		else:
+			salary = 0
+			#print salary
+		total_salary = total_salary + float(salary)
+	return total_salary
 
-def calc_netsalary(team)
-	net_salary_%r = sum(%r_salaries) % (team, team)
-
-def print_net_print_salary(team)
-	if net_salary_team1 > 65000000:
-		print (${:,.2f}".format(net_salary_team1)) + " -- !OVER CAP!"
+def print_salary(total_salary):
+	if total_salary > 65000000:
+		print team
+		print ("${:,.2f}".format(total_salary)) + " -- OVER CAP"
 	else:
-		print ("${:,.2f}".format(net_salary_team1)) + " -- UNDER CAP"
+		print team
+		print ("${:,.2f}".format(total_salary)) + " -- UNDER CAP"
+
+team1 = ['Deron Williams', 'Chris Paul', 'Kobe Bryant']
+team2 = ['Dwight Howard', 'Kevin Durant', 'Wesley Matthews']
+
+team_list = [team1, team2]
+
+for index, team in enumerate(team_list):
+	#print team
+	print_salary(calc_salary(team))
